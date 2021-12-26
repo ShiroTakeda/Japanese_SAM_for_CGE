@@ -14,23 +14,23 @@ REM 	注: このプログラムを実行するには、その前にデータの�
 REM 	く必要があります。
 
 REM	2015年のデータ用
-:: call gams check_aggr_data --set_name=japan_2015_13x13_std
+call gams check_aggr_data --set_name=japan_2015_13x13_std
 call gams check_aggr_data --set_name=japan_2015_37x37_std
-:: call gams check_aggr_data --set_name=japan_2015_185x185_std
-:: call gams check_aggr_data --set_name=japan_2015_basic_std
+call gams check_aggr_data --set_name=japan_2015_185x185_std
+call gams check_aggr_data --set_name=japan_2015_basic_std
 
 REM	2011年のデータ用
-:: call gams check_aggr_data --set_name=japan_2011_13x13_std
-:: call gams check_aggr_data --set_name=japan_2011_37x37_std
-:: call gams check_aggr_data --set_name=japan_2011_188x188_std
-:: call gams check_aggr_data --set_name=japan_2011_basic_std
-:: call gams check_aggr_data --set_name=japan_2011_26x18
+call gams check_aggr_data --set_name=japan_2011_13x13_std
+call gams check_aggr_data --set_name=japan_2011_37x37_std
+call gams check_aggr_data --set_name=japan_2011_188x188_std
+call gams check_aggr_data --set_name=japan_2011_basic_std
+call gams check_aggr_data --set_name=japan_2011_26x18
 
 REM	2005年のデータ用
-:: call gams check_aggr_data --set_name=japan_2005_13x13_std
-:: call gams check_aggr_data --set_name=japan_2005_34x34_std
-:: call gams check_aggr_data --set_name=japan_2005_188x188_std
-:: call gams check_aggr_data --set_name=japan_2005_basic_std
+call gams check_aggr_data --set_name=japan_2005_13x13_std
+call gams check_aggr_data --set_name=japan_2005_34x34_std
+call gams check_aggr_data --set_name=japan_2005_188x188_std
+call gams check_aggr_data --set_name=japan_2005_basic_std
 
 pause
 
