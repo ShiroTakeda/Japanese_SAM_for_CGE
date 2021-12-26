@@ -1,0 +1,4 @@
+# 全てのtxtファイル
+*.gms diff=sjis
+*.set diff=sjis
+*.map diff=sjis

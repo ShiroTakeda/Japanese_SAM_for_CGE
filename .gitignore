@@ -1,0 +1,10 @@
+*.lst
+Make_IO/data_check/old/check_japan_48x40.xlsx
+Make_IO/data_check/old/check_japan_42x42.xlsx
+Make_IO/data_check/old/
+Make_IO/source_data/部門統合用/
+Make_IO/set/GTAP/
+*.html
+Make_IO/source_data/元データ/
+*.gdx
+*.log
