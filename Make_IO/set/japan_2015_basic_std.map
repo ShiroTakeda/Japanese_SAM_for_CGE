@@ -1,0 +1,73 @@
+$ontext
+
+mapping用の集合の定義。統合後の集合はsetフォルダで定義。
+
+このファイルでは以下の 4 つの集合（set）を定義．
+
+・行部門の mapping 用の集合 (row_map)
+・列部門の mapping 用の集合 (col_map)
+・付加価値部門用の mapping 用の集合 (va_map)
+・最終需要部門用の mapping 用の集合 (fd_map)
+
+$offtext
+
+set row_map(*,*) "行部門のマップ";
+
+row_map(row_bas,row) = no;
+row_map(row_bas,row)$sameas(row_bas,row) = yes;
+
+set col_map(*,*) "列部門のマップ";
+
+col_map(col_bas,col) = no;
+col_map(col_bas,col)$sameas(col_bas,col) = yes;
+
+set va_map(row_bas,va) "付加価値部門用の mapping 用の集合" /
+7111001.ohcr       宿泊・日当
+7111002.ohcr       交際費
+7111003.ohcr       福利厚生費
+9111000.wage       賃金・俸給
+9112000.ssce       社会保険料（雇用主負担）
+9113000.othp       その他の給与及び手当
+9211000.opse       営業余剰
+9311000.depr       資本減耗引当
+9321000.drsc       資本減耗引当（社会資本等減耗分）
+9411000.idtx       間接税（関税・輸入品商品税を除く。）
+9511000.subs      （控除）経常補助金
+/;
+
+set fd_map(col_bas,fd) "最終需要部門用の mapping 用の集合" /
+711100.ohcc       家計外消費支出（列）
+721100.hhco       家計消費支出
+721200.npco       対家計民間非営利団体消費支出
+731101.govc       中央政府集合的消費支出
+731102.govc       地方政府集合的消費支出
+731103.govc       中央政府個別的消費支出
+731104.govc       地方政府個別的消費支出
+732101.gosc       中央政府集合的消費支出（社会資本等減耗分）
+732102.gosc       地方政府集合的消費支出（社会資本等減耗分）
+732103.gosc       中央政府個別的消費支出（社会資本等減耗分）
+732104.gosc       地方政府個別的消費支出（社会資本等減耗分）
+741100.invg       国内総固定資本形成（公的）
+751100.invp       国内総固定資本形成（民間）
+761101.stck       生産者製品在庫純増
+761102.stck       半製品・仕掛品在庫純増
+761103.stck       流通在庫純増
+761104.stck       原材料在庫純増
+801101.expo       輸出（普通貿易）
+801102.expo       輸出（特殊貿易）
+801200.expd       輸出（直接購入）
+841101.impo       （控除）輸入（普通貿易）
+841102.impo       （控除）輸入（特殊貿易）
+841200.impd       （控除）輸入（直接購入）
+851100.imta       （控除）関税
+861100.imtx       （控除）輸入品商品税
+/;
+
+
+* --------------------
+* Local Variables:
+* mode: gams
+* fill-column: 80
+* coding: sjis-dos
+* End:
+

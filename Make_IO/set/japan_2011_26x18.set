@@ -1,0 +1,96 @@
+$ontext
+
+これは以下の論文で利用されている分類
+
+Takeda, S. and Arimura, T.H., (2021). "A computable general equilibrium analysis
+of environmental tax reform in Japan with a forward-looking dynamic model."
+Sustainability Science, Vol.16, No.2, pp.503-521.
+
+このファイルでは以下の 4 つの集合（set）を定義．
+
+・統合後の行部門の集合 (row)
+・統合後の列部門の集合 (col) ．
+・統合後の付加価値部門の集合 (va) ．
+・統合後の最終需要部門の集合 (fd)
+
+$offtext
+
+set     row     行部門 (26) /
+agr     農林水産業
+coa     石炭
+oil     原油
+gas     天然ガス
+nei     非エネルギー集約的
+eis     エネルギー集約的
+gso     ガソリン
+jet     ジェット燃料油
+ker     灯油
+loi     軽油
+hoi     重油
+nap     ナフサ
+lpg     液化石油ガス（LPG）
+opp     その他の石油製品
+cok     コークス
+cop     その他の石炭製品
+con     建設
+ely     電力
+g_h     ガス・熱供給
+ser     サービス
+mhs     医療・保険・社会保障・介護
+rai     鉄道輸送
+r_p     道路旅客輸送
+r_f     道路貨物輸送
+wat     水運
+air     航空輸送
+/;
+
+set     col     列部門 (18) /
+agr     農林水産業
+f_f     鉱業（化石燃料）
+nei     非エネルギー集約的
+eis     エネルギー集約的
+pet     石油製品
+cop     石炭製品
+con     建設
+e_f     事業用火力発電
+e_n     事業用原子力発電
+e_h     水力・その他の事業用発電
+g_h     ガス・熱供給
+ser     サービス
+mhs     医療・保険・社会保障・介護
+rai     鉄道輸送
+r_p     道路旅客輸送
+r_f     道路貨物輸送
+wat     水運
+air     航空輸送
+/;
+
+set     va      付加価値部門 /
+epin    "雇用者所得"
+ssce    "社会保障雇主負担"
+opse    "営業余剰"
+depr    "資本減耗引当"
+idtx    "間接税"
+subs    "補助金"
+/;
+
+set     fd      最終需要部門 /
+hhco    "民間消費"
+gvci    "政府消費（個別）"
+gvcc    "政府消費（集合）"
+invp    "投資（民間）"
+invg    "投資（公的）"
+stck    "在庫投資"
+expo    "輸出"
+impo    "輸入"
+imta    "関税"
+imtx    "輸入品商品税"
+/;
+
+
+* --------------------
+* Local Variables:
+* mode: gams
+* fill-column: 80
+* coding: sjis-dos
+* End:
