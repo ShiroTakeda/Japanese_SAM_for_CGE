@@ -25,7 +25,7 @@ $offtext
 * $setglobal year 2011
 $setglobal set japan_2015_basic_std
 
-*       CO2（3EID）データを利用する場合はコメントアウトをとる。
+*       CO2（3EID）データを利用する場合は非ゼロを設定
 $setglobal fl_use_co2 1
 
 *       データの年
