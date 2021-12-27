@@ -20,16 +20,18 @@ $offtext
 *       Year of the data = 2005, 2011 or 2015
 $if not setglobal year $setglobal year 2015
 
+$setglobal fs %system.dirsep% 
+
 *       ----------------------------------------------------------------------
 *       産業連関表の基本分類データを読み込む
-$include ..\data\basic_code_%year%.gms
+$include .%fs%set%fs%basic_code_%year%.gms
 
 display row_bas, row_st, row_va, row_ind, col_bas, col_st, col_fd, col_fd_imp,
         col_fd_, col_exp, col_imp, col_mar, col_ind;
 
 alias (col_ind,col_), (row_ind,row_);
 
-$include ..\data\map_for_vtable_%year%.gms
+$include .%fs%set%fs%map_for_vtable_%year%.gms
 display map_v;
 
 $ontext
@@ -69,7 +71,7 @@ set     sp      "Special codes (特殊コード)"
         item_q  "Items (物量表用)"
         item_o  "Items (産出表用)"
     ;
-$gdxin .\original_io_%year%.gdx
+$gdxin .%fs%source_data%fs%original_io_%year%.gdx
 
 $load sp, item, item_q, item_o
 display sp, item, item_q, item_o;
@@ -312,7 +314,8 @@ $ontext
 iotable_u, iotable_v, iotable_fd, iotable_va の 4 つを japan_io_%year%.gdx に出力する．
 
 $offtext
-execute_unload '..\data\japan_io_%year%.gdx', iotable_u, iotable_v, iotable_fd, iotable_va, iotable_q, iotable_q_v;
+execute_unload '.%fs%data%fs%japan_io_%year%.gdx', iotable_u, iotable_v, iotable_fd, iotable_va, iotable_q, iotable_q_v;
+
 
 
 * --------------------

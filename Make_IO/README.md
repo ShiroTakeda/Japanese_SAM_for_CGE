@@ -3,7 +3,7 @@ Filename:       README.md
 Author:         Shiro Takeda
 e-mail          <shiro.takeda@gmail.com>
 First-written:  <2020-11-29>
-Time-stamp:     <2021-12-24 16:06:36 st>
+Time-stamp:     <2021-12-27 21:15:21 st>
 -->
 
 Make_IO フォルダについて説明
@@ -16,46 +16,36 @@ Make_IO フォルダについて説明
 + 元の産業連関表のデータ、3EIDデータを GAMS で利用しやすい用に加工
 + 元の財・部門の統合
 
-### ［注］
-
-+ 以下の作業では DOS のバッチファイル（拡張子が bat のファイル）を使います。
-+ バッチファイルでは gams のプログラムを呼出しているので、gams のプログラム
-  （gams.exeというファイル）にパス（PATH）が通っている必要があります。
-+ 直接 gms ファイルを実行すれば、バッチファイルを使わなくても同じようなことはで
-  きるのですが、以下ではとりあえず DOS のバッチファイルを使う前提で話をしていま
-  す。
-  
 ## 手順
 
-以下の手順でプログラムを実行します（バッチファイルをクリックすれば実行できます）。
+以下の手順でプログラムを実行します。
 
-+ ステップ1: まず、source_data フォルダに行き、そこで `run_covert_io_table.bat` を実行します。
-+ ステップ2: 元の Make_IO フォルダで `run_make_io.bat` を実行
-+ ステップ3: Make_IO フォルダで `run_make_3EID.bat` を実行
++ ステップ1: `run_covert_io_table.gms` を実行
++ ステップ2: `run_make_io.gms` を実行
++ ステップ3: `run_make_3EID.gms` を実行
 
 この後、データの統合をします。それには
 
-+ ステップ4: `run_aggr.bat` を実行
++ ステップ4: `run_aggr.gms` を実行
 
 そして、統合されたデータのチェックをします。
 
-+ ステップ5: `run_check_aggr_data.bat` を実行
++ ステップ5: `run_check_aggr_data.gms` を実行
 
 以下、各ステップをもう少し詳しく説明します。
 
 
-### ステップ1
+### ステップ1 (run_convert_io_table.gms)
 
 これで Excel ファイルに入っている産業連関表データを GAMS が扱いやすい GDX ファイ
-ルに変換します。バッチファイルの中で souce_data フォルダの
-`convert_io_table.gms` を実行しています。2015年、2011年、2005年の 3 つのデータを
-変換しています。
+ルに変換します。ファイルの中で souce_data フォルダの`convert_io_table.gms` を実
+行しています。2015年、2011年、2005年の 3 つのデータを変換しています。
 
 この結果、source_data フォルダに `original_io_XXXX.gdx` というような名前（XXXXの
 ところは年）の GDX ファイルが作成されます。
 
 
-### ステップ2
+### ステップ2 (run_make_io.gms)
 
 ここでステップ1で作成したIO表のファイルからデータを読み込み、CGE分析で利用しやす
 い用に加工をします。
@@ -63,9 +53,9 @@ Make_IO フォルダについて説明
 + 注: 加工といってもデータの数値を変えているわけではなく、形式の変更をしているだ
   けです。
   
-中で source_data フォルダの `make_io.gms` を実行しています。
+この中で source_data フォルダの `make_io.gms` を実行しています。
 
-    call gams make_io.gms --year=2015
+    $call gams .\source_data_\make_io.gms --year=2015
     
 というような形式で実行します。
   
@@ -78,25 +68,25 @@ Make_IO フォルダについて説明
 つのファイルが data フォルダに作成されます。
 
   
-### ステップ3
+### ステップ3 (run_make_3EID.gms)
 
 ここで3EIDデータを Excel ファイルから読み込み、産業連関表のデータに合うように加
 工します。
 
 この中で、
 
-    call gams make_3eid_2015
-    call gams make_3eid_2011
-    call gams make_3eid_2005
+    $call gams .\source_data\make_3eid_2015.gms
+    $call gams .\source_data\make_3eid_2011.gms
+    $call gams .\source_data\make_3eid_2005.gms
     
-のように3つのプログラムを実行しています。それぞれ 2015年、2011年、2005年のデータ
-用です。
+のように3つのプログラム（make_3eid_2015.gms など）を実行しています。それぞれ
+2015年、2011年、2005年のデータ用です。
 
 この結果、`japan_io_2015_co2.gdx`、`japan_io_2011_co2.gdx`、
 `japan_io_2005_co2.gdx` という3つのファイルが data フォルダに作成されます。
 
 
-### ステップ4
+### ステップ4: 部門の統合（run_aggr.gms）
 
 ここまでのデータでは元の産業連関表の部門分類のままになっています。ここではその部
 門分類を統合します。
@@ -110,6 +100,18 @@ Make_IO フォルダについて説明
 イルは拡張子を「map」とするので以下では map ファイルと呼びます。
 
 set ファイル、map ファイルはともに set フォルダに置いてください。
+
+例えば、2011年のデータを 26財、18部門に統合するための set ファイル、map ファイル
+をそれぞれ `japan_2011_26x18.set`、`japan_2011_26x18.set`という名前で作成した場
+合には、
+
+    $call gams aggr --year=2011 --set_name=japan_2011_26x18
+
+のように実行します。
+
+これを実行すると、統合したデータが aggr_data フォルダの `japan_2011_26x18.gdx`
+というファイルに出力されます。
+
 
 #### set ファイルの設定
 
@@ -127,6 +129,7 @@ row と col に加え以下の二つの set も定義されています。
 
 この二つは自分では変更しないでください。
 
+
 #### map ファイルの設定
 
 map ファイルのん名前は拡張子以外は set ファイルと同じにします。例えば、set ファ
@@ -139,27 +142,23 @@ map ファイルでは
 
 の二つを指定します。
 
-#### CO2データの利用
 
-CO2データを利用したい場合には aggr.gms の中の
+### ステップ5: 統合したデータのチェック（run_check_aggr_data.gms）
 
-    * $setglobal fl_use_co2 1
-    
-となっている部分を
+run_check_aggr_data.gms を実行すると、統合したデータのチェックをするための Excel ファ
+イルを出力します。
 
-    $setglobal fl_use_co2 1
+例えば、上の例で作成した `japan_2011_26x18.gdx` というファイルのデータをチェックするのなら、
 
-のようにコメントアウト記号をとってください。
+    $call gams check_aggr_data --set_name=japan_2011_26x18
+
+を実行します。すると、check_data フォルダに `check_japan_2011_26x18.xlsx` という
+ファイルが作成されます。
 
 
 
-## ファイル
 
-| ファイル            | 説明                               |
-|:--------------------|:-----------------------------------|
-| `jecon.bst`         | これが bst ファイルです。          |
-| `jecon-example.tex` | 使い方等の説明をしたファイルです。 |
-| `README.md`         | このファイルです。                 |
+
 
 
 <!--

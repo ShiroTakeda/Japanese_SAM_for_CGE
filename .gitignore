@@ -14,3 +14,5 @@ Make_IO/set/old/
 Make_IO/source_data/io_basic_2011_alt.xlsx
 Make_IO/source_data/make_io_alt.gms
 Make_SAM/old/
+*.bat
+*.org

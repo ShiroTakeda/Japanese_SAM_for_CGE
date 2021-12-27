@@ -13,7 +13,10 @@ $setglobal recreate 1
 *       Set non-zero to recreate if you want to recreate GDX file from Excel file.
 $if not setglobal recreate $setglobal recreate 0
 
-$include ..\data\basic_code_2005.gms
+*       ディレクトリの区切り文字列
+$setglobal fs %system.dirsep%
+
+$include .%fs%set%fs%basic_code_2005.gms
 
 display row_bas, row_st, row_va, row_ind, col_bas, col_st, col_fd, col_imp,
         col_mar, col_ind;
@@ -62,13 +65,13 @@ parameter
 ;
 
 $onecho > command.txt
-i=.\3EID_2005.xlsx o=.\3EID_2005.gdx
+i=.%fs%source_data%fs%3EID_2005.xlsx o=.%fs%source_data%fs%3EID_2005.gdx
 par=co2_temp rng=CO2!D4:AK410 rdim=1 cdim=1
 par=co2_contrib_temp rng=contribution!D4:AK410 rdim=1 cdim=1
 $offecho
 $if not %recreate%==0 $call '=gdxxrw @command.txt';
 
-$gdxin .\3EID_2005.gdx
+$gdxin .%fs%source_data%fs%3EID_2005.gdx
 
 $load co2_temp co2_contrib_temp
 
@@ -134,12 +137,12 @@ display iotable_co2_contrib;
 
 *       ----------------------------------------------------------------------
 *       データの export
-display "com: データの export";
+display "@ データの export";
 $ontext
 iotable_end, iotable_fd, iotable_va の 3 つを japan-io2005.gdx に出力する．
 
 $offtext
-execute_unload '..\data\japan_io_2005_co2.gdx', iotable_co2_data, iotable_co2_contrib;
+execute_unload '.%fs%data%fs%japan_io_2005_co2.gdx', iotable_co2_data, iotable_co2_contrib;
 
 * --------------------
 * Local Variables:

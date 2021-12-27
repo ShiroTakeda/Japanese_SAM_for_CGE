@@ -2,14 +2,17 @@ $ontext
 
 First-written:  <2014/03/10>>
 
-çµ±åˆå‰ã®åŸºæœ¬å–å¼•è¡¨ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ 
+“‡‘O‚ÌŠî–{æˆø•\‚ğƒ`ƒFƒbƒN‚·‚éƒvƒƒOƒ‰ƒ€
 
 $offtext
 
 * $setglobal year 2011
 
-*       ãƒ‡ãƒ¼ã‚¿ã®å¹´
+*       ƒf[ƒ^‚Ì”N
 $if not setglobal year $setglobal year 2015
+
+*       ƒfƒBƒŒƒNƒgƒŠ‚Ì‹æØ‚è•¶š—ñ
+$setglobal fs %system.dirsep%
 
 $setglobal output_file check_basic_table_%year%
 
@@ -18,19 +21,19 @@ option decimals = 0;
 display "output_file = %output_file%";
 
 *       ----------------------------------------------------------------------
-*       ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã® import:
-display "@ ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã® import:";
+*       ƒCƒ“ƒfƒbƒNƒX‚Ì import:
+display "@ ƒCƒ“ƒfƒbƒNƒX‚Ì import:";
 
-$include ..\data\basic_code_%year%.gms
+$include ..%fs%set%fs%basic_code_%year%.gms
 
 display row_bas, row_st, row_va, row_ind, col_bas, col_st, col_fd, col_fd_imp,
         col_fd_, col_exp, col_imp, col_mar, col_ind;
 
 *       ----------------------------------------------------------------------
-*       çµ±åˆå‰ã®ãƒ‡ãƒ¼ã‚¿ã® import
-display "@ çµ±åˆå‰ã®ãƒ‡ãƒ¼ã‚¿ã® import";
+*       “‡‘O‚Ìƒf[ƒ^‚Ì import
+display "@ “‡‘O‚Ìƒf[ƒ^‚Ì import";
 
-$gdxin ..\data\japan_io_%year%.gdx
+$gdxin ..%fs%data%fs%japan_io_%year%.gdx
 
 parameter
     iotable_u   "IO table - %year% (U table)"
@@ -47,8 +50,8 @@ display iotable_u, iotable_v, iotable_fd, iotable_va, iotable_q, iotable_q_v;
 parameter
     iotable_co2_data(*,*)    "CO2 emissions (MtCO2)";
 
-*       CO2æ’å‡ºé‡ãƒ‡ãƒ¼ã‚¿
-$gdxin ..\data\japan_io_%year%_co2.gdx
+*       CO2”ro—Êƒf[ƒ^
+$gdxin ..%fs%data%fs%japan_io_%year%_co2.gdx
 
 $load iotable_co2_data
 
@@ -56,8 +59,8 @@ display iotable_co2_data;
 
 
 *       ----------------------------------------------------------------------
-*       ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚§ãƒƒã‚¯
-display "@ ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚§ãƒƒã‚¯";
+*       ƒf[ƒ^‚Ìƒ`ƒFƒbƒN
+display "@ ƒf[ƒ^‚Ìƒ`ƒFƒbƒN";
 
 parameter
     chk_io      "IO table - %year%"
@@ -86,10 +89,10 @@ chk_io_co2(row_ind,col_fd_imp)
     = iotable_co2_data(row_ind,col_fd_imp);
 
 *       ----------------------------------------------------------------------
-*       ãƒ‡ãƒ¼ã‚¿ã® export
-display "@ ãƒ‡ãƒ¼ã‚¿ã® export";
+*       ƒf[ƒ^‚Ì export
+display "@ ƒf[ƒ^‚Ì export";
 $ontext
-iotable ã‚’ GDX ãƒ•ã‚¡ã‚¤ãƒ«ã«ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆï¼
+iotable ‚ğ GDX ƒtƒ@ƒCƒ‹‚ÉƒGƒNƒXƒ|[ƒgD
 
 $offtext
 display chk_io, chk_io_q, chk_io_q_v, chk_io_co2;
@@ -97,11 +100,11 @@ display chk_io, chk_io_q, chk_io_q_v, chk_io_co2;
 execute_unload '%output_file%', chk_io, chk_io_q, chk_io_q_v, chk_io_co2;
 
 $onecho > temp.txt
-i=./%output_file%.gdx o=./%output_file%.xlsx
+i=%output_file%.gdx o=%output_file%.xlsx
 epsout=0
-text="ç”£æ¥­é€£é–¢è¡¨ï¼ˆ10å„„å††ï¼‰" rng=Value_data!A1 par=chk_io rng=Value_data!A3 rdim=1 cdim=1
-text="ç‰©é‡è¡¨" rng=Q_data!A1 par=chk_io_q rng=Q_data!A3 rdim=1 cdim=1
-text="ç‰©é‡ã«å¯¾å¿œã—ãŸæŠ•å…¥é¡ï¼ˆ10å„„å††ï¼‰" rng=QV_data!A1 par=chk_io_q_v rng=QV_data!A3 rdim=1 cdim=1
+text="Y‹Æ˜AŠÖ•\i10‰­‰~j" rng=Value_data!A1 par=chk_io rng=Value_data!A3 rdim=1 cdim=1
+text="•¨—Ê•\" rng=Q_data!A1 par=chk_io_q rng=Q_data!A3 rdim=1 cdim=1
+text="•¨—Ê‚É‘Î‰‚µ‚½“Š“üŠzi10‰­‰~j" rng=QV_data!A1 par=chk_io_q_v rng=QV_data!A3 rdim=1 cdim=1
 $offecho
 
 *       The following command evokes gdxxrw with the content of temp.txt as
@@ -117,5 +120,5 @@ execute 'del temp.txt';
 * Local Variables:
 * mode: gams
 * fill-column: 80
-* coding: utf-8-dos
+* coding: sjis-dos
 * End:

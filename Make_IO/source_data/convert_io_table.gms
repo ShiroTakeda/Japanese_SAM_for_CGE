@@ -1,103 +1,105 @@
-$title ç”£æ¥­é€£é–¢è¡¨ã‚’ excel ã‹ã‚‰ GDX ãƒ•ã‚¡ã‚¤ãƒ«ã«å¤‰æ›ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ 
-display "@ ç”£æ¥­é€£é–¢è¡¨ã‚’ excel ã‹ã‚‰ GDX ãƒ•ã‚¡ã‚¤ãƒ«ã«å¤‰æ›ã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ";
+$title Y‹Æ˜AŠÖ•\‚ğ excel ‚©‚ç GDX ƒtƒ@ƒCƒ‹‚É•ÏŠ·‚·‚éƒvƒƒOƒ‰ƒ€
+display "@ Y‹Æ˜AŠÖ•\‚ğ excel ‚©‚ç GDX ƒtƒ@ƒCƒ‹‚É•ÏŠ·‚·‚éƒvƒƒOƒ‰ƒ€";
 $ontext
 First-written:  <2015/12/09>
 
-å˜ä½
-ãƒ»å…ƒã®é‡‘é¡ãƒ‡ãƒ¼ã‚¿ã¯100ä¸‡å††ï¼
-ãƒ»ç‰©é‡é‡ã¯ãã‚Œãã‚Œã®å›ºæœ‰å˜ä½
+’PˆÊ
+EŒ³‚Ì‹àŠzƒf[ƒ^‚Í100–œ‰~D
+E•¨—Ê—Ê‚Í‚»‚ê‚¼‚ê‚ÌŒÅ—L’PˆÊ
 
 $offtext
 
 *       Year of the data = 2005, 2011 or 2015
 $if not setglobal year $setglobal year 2015
 
-$include ../data/basic_code_%year%.gms
+$setglobal fs %system.dirsep% 
+
+$include .%fs%set%fs%basic_code_%year%.gms
 
 display row_bas, row_st, row_va, row_ind, col_bas, col_st, col_fd, col_fd_imp,
         col_fd_, col_exp, col_imp, col_mar, col_ind;
 
 set     item /
-pro     "è³¼å…¥è€…ä¾¡æ ¼"
-pur     "ç”Ÿç”£è€…ä¾¡æ ¼"
-inc_pro "æŠ•å…¥ä¿‚æ•°ï¼ˆç”Ÿç”£è€…ä¾¡æ ¼ï¼‰"
-inc_pur "æŠ•å…¥ä¿‚æ•°ï¼ˆè³¼å…¥è€…ä¾¡æ ¼ï¼‰"
-imp     "è¼¸å…¥"
-m1      "å¸"
-m2      "å°å£²"
-m3      "é‰„é“"
-m4      "é“è·¯"
-m5      "æ²¿æµ·"
-m6      "æ¸¯æ¹¾"
-m7      "èˆªç©º"
-m8      "åˆ©ç”¨é‹é€"
-m9      "å€‰åº«"
+pro     "w“üÒ‰¿Ši"
+pur     "¶YÒ‰¿Ši"
+inc_pro "“Š“üŒW”i¶YÒ‰¿Šij"
+inc_pur "“Š“üŒW”iw“üÒ‰¿Šij"
+imp     "—A“ü"
+m1      "‰µ"
+m2      "¬”„"
+m3      "“S“¹"
+m4      "“¹˜H"
+m5      "‰ˆŠC"
+m6      "`˜p"
+m7      "q‹ó"
+m8      "—˜—p‰^‘—"
+m9      "‘qŒÉ"
 /;
 
 set     item_q /
-q       "æ•°é‡"
-value   "é‡‘é¡"
+q       "”—Ê"
+value   "‹àŠz"
 /;
 
 set     item_o /
-pro     "è³¼å…¥è€…ä¾¡æ ¼"
-pur     "ç”Ÿç”£è€…ä¾¡æ ¼"
-drt_pro "éœ€è¦æ¯”ç‡ï¼ˆç”Ÿç”£è€…ä¾¡æ ¼ï¼‰"
-drt_pur "éœ€è¦æ¯”ç‡ï¼ˆè³¼å…¥è€…ä¾¡æ ¼ï¼‰"
-imp     "è¼¸å…¥"
-m1      "å¸"
-m2      "å°å£²"
-m3      "é‰„é“"
-m4      "é“è·¯"
-m5      "æ²¿æµ·"
-m6      "æ¸¯æ¹¾"
-m7      "èˆªç©º"
-m8      "åˆ©ç”¨é‹é€"
-m9      "å€‰åº«"
+pro     "w“üÒ‰¿Ši"
+pur     "¶YÒ‰¿Ši"
+drt_pro "ù—v”ä—¦i¶YÒ‰¿Šij"
+drt_pur "ù—v”ä—¦iw“üÒ‰¿Šij"
+imp     "—A“ü"
+m1      "‰µ"
+m2      "¬”„"
+m3      "“S“¹"
+m4      "“¹˜H"
+m5      "‰ˆŠC"
+m6      "`˜p"
+m7      "q‹ó"
+m8      "—˜—p‰^‘—"
+m9      "‘qŒÉ"
 /;
 
 set     sp /
 1
-2       "å±‘æŠ•å…¥"
-3       "å±‘ç™ºç”Ÿ"
-4       "å‰¯ç”£ç‰©æŠ•å…¥"
-5       "å‰¯ç”£ç‰©ç™ºç”Ÿ"
-6       "å•†æ¥­ãƒãƒ¼ã‚¸ãƒ³"
-7       "å›½å†…è²¨ç‰©é‹è³ƒ"
+2       "‹û“Š“ü"
+3       "‹û”­¶"
+4       "•›Y•¨“Š“ü"
+5       "•›Y•¨”­¶"
+6       "¤‹Æƒ}[ƒWƒ“"
+7       "‘“à‰İ•¨‰^’À"
 /;
 
 parameter
-    t_tonyu(*,*,*,item)         "æŠ•å…¥è¡¨ï¼ˆ100ä¸‡å††ï¼‰"
-    t_butsuryo(*,*,*,item_q)    "ç‰©é‡è¡¨"
-    t_sanshutsu(*,*,*,item_o)   "ç”£å‡ºè¡¨ï¼ˆVè¡¨ã€100ä¸‡å††ï¼‰"
+    t_tonyu(*,*,*,item)         "“Š“ü•\i100–œ‰~j"
+    t_butsuryo(*,*,*,item_q)    "•¨—Ê•\"
+    t_sanshutsu(*,*,*,item_o)   "Yo•\iV•\A100–œ‰~j"
 ;
 
 $onecho > temp.txt
-i=io_basic_%year%.xlsx o=temp_io_%year%.gdx
+i=.%fs%source_data%fs%io_basic_%year%.xlsx o=.%fs%source_data%fs%temp_io_%year%.gdx
 par=t_tonyu rng=tonyu!A3:Q70000 rdim=3 cdim=1
 par=t_butsuryo rng=butsuryo!A3:E10000 rdim=3 cdim=1
 par=t_sanshutsu rng=sanshutsu!A3:Q70000 rdim=3 cdim=1
 $offecho
 
-* ä»¥ä¸‹ã®è¡Œã¯æœ€åˆã«å®Ÿè¡Œã™ã‚‹ã¨ãã®ã¿å®Ÿè¡Œã™ã‚Œã°ã‚ˆã„ã€‚
+* ˆÈ‰º‚Ìs‚ÍÅ‰‚ÉÀs‚·‚é‚Æ‚«‚Ì‚İÀs‚·‚ê‚Î‚æ‚¢B
 $call '=gdxxrw @temp.txt'
 
-$gdxin temp_io_%year%.gdx
+$gdxin .%fs%source_data%fs%temp_io_%year%.gdx
 
 $load t_tonyu, t_butsuryo, t_sanshutsu
 
 display t_tonyu, t_butsuryo, t_sanshutsu;
 
-execute_unload "original_io_%year%.gdx", t_tonyu, t_butsuryo, t_sanshutsu, item, item_q, item_o, sp, row_bas, col_bas;
+execute_unload ".%fs%source_data%fs%original_io_%year%.gdx", t_tonyu, t_butsuryo, t_sanshutsu, item, item_q, item_o, sp, row_bas, col_bas;
 
-*       ä¸è¦ãªãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤
+*       •s—v‚Èƒtƒ@ƒCƒ‹‚ğíœ
 execute 'del temp.txt';
-execute 'del temp_io_%year%.gdx';
+execute 'del .%fs%source_data%fs%temp_io_%year%.gdx';
 
 
 * --------------------
 * Local Variables:
 * mode: gams
 * fill-column: 80
-* coding: utf-8-dos
+* coding: sjis-dos
 * End:

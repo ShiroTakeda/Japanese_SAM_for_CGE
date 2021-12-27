@@ -17,11 +17,14 @@ $offtext
 
 $setglobal set_name japan_2015_basic_std
 
+*       ディレクトリの区切り文字列
+$setglobal fs %system.dirsep%
+
 $if not setglobal set_name $setglobal set_name japan_2015_37x37
 
-$setglobal data_file ./aggr_data/%set_name%.gdx
+$setglobal data_file .%fs%aggr_data%fs%%set_name%.gdx
 
-$setglobal set_file ./set/%set_name%.set
+$setglobal set_file .%fs%set%fs%%set_name%.set
 
 $include %set_file%
 
@@ -170,7 +173,7 @@ execute_unload "./data_check/check_%set_name%.gdx", row, col, va, fd, iotable,
     chk_col_out, chk_row_out, chk_co2_use, chk_co2_so, chk_trade;
 
 $onecho > temp.txt
-i=./data_check/check_%set_name%.gdx o=./data_check/check_%set_name%.xlsx
+i=.%fs%data_check%fs%check_%set_name%.gdx o=.%fs%data_check%fs%check_%set_name%.xlsx
 epsout=0
 *       Meta_data
 text="%set_name%" rng=Meta_data!A1
@@ -232,8 +235,8 @@ execute 'del temp.txt';
 
 * --------------------
 * Local Variables:
-* coding: sjis-dos
 * mode: gams
 * fill-column: 80
+* coding: sjis-dos
 * End:
 

@@ -23,7 +23,10 @@ CO2 のデータ（3EIDのデータ）を利用するのなら、fl_use_co2 に非ゼロを設定する。利
 $offtext
 
 * $setglobal year 2011
-$setglobal set japan_2015_basic_std
+* $setglobal set japan_2011_26x18
+
+*       ディレクトリの区切り文字列
+$setglobal fs %system.dirsep%
 
 *       CO2（3EID）データを利用する場合は非ゼロを設定
 $setglobal fl_use_co2 1
@@ -32,17 +35,17 @@ $setglobal fl_use_co2 1
 $if not setglobal year $setglobal year 2015
 
 *       統合後の集合を定義したファイルの指定
-$if not setglobal set $setglobal set japan_2015_25x16
-$setglobal set_file .\set\%set%.set
+$if not setglobal set_name $setglobal set_name japan_2015_25x16
+$setglobal set_file .%fs%set%fs%%set_name%.set
 
 *       CO2（3EID）データを利用するか？利用するなら非ゼロを設定
 $if not setglobal fl_use_co2 $setglobal fl_use_co2 0
 
 *       統合用のmapping集合を定義したファイルの指定
-$setglobal map_file .\set\%set%.map
+$setglobal map_file .%fs%set%fs%%set_name%.map
 
-$if not setglobal output $setglobal output %set%
-$setglobal output_file .\aggr_data\%output%.gdx
+$if not setglobal output $setglobal output %set_name%
+$setglobal output_file .%fs%aggr_data%fs%%output%.gdx
 
 option decimals = 0;
 
@@ -54,7 +57,7 @@ display "output_file = %output_file%";
 *       インデックスの import:
 display "@ インデックスの import:";
 
-$include .\data\basic_code_%year%.gms
+$include .%fs%set%fs%basic_code_%year%.gms
 
 display row_bas, row_st, row_va, row_ind, col_bas, col_st, col_fd, col_fd_imp,
         col_fd_, col_exp, col_imp, col_mar, col_ind;
@@ -63,7 +66,7 @@ display row_bas, row_st, row_va, row_ind, col_bas, col_st, col_fd, col_fd_imp,
 *       統合前のデータの import
 display "@ 統合前のデータの import";
 
-$gdxin .\data\japan_io_%year%.gdx
+$gdxin .%fs%data%fs%japan_io_%year%.gdx
 
 parameter
     iotable_u           "IO table %year% (U Table), mil. yen"
@@ -254,7 +257,7 @@ $if %fl_use_co2%==0 iotable_co2_data(row_ind,col_ind) = 0;
 $if %fl_use_co2%==0 iotable_co2_data(row_ind,col_fd) = 0;
 
 *       CO2排出量データを使う場合
-$if not %fl_use_co2%==0 $gdxin .\data\japan_io_%year%_co2.gdx
+$if not %fl_use_co2%==0 $gdxin .%fs%data%fs%japan_io_%year%_co2.gdx
 $if not %fl_use_co2%==0 $load iotable_co2_data
 
 display iotable_co2_data;
