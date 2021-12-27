@@ -16,3 +16,4 @@ Make_IO/source_data/make_io_alt.gms
 Make_SAM/old/
 *.bat
 *.org
+Make_IO/run_all.gms
