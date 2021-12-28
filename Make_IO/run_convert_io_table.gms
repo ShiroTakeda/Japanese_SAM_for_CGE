@@ -4,8 +4,7 @@ $title 産業連関表と3EIDデータをGDXファイルに出力するための
 $setglobal fs %system.dirsep%
 $ontext
 
-上のように fs を定義すると、%fs% でディレクトリの区切文字列を表現できる。このよ
-うにしておくのは、Windows と Mac でディレクトリの区切文字列が異なるため。
+上のように fs を定義すると、%fs% でディレクトリの区切文字列を表現できる。
 
 $offtext
 

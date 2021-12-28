@@ -17,3 +17,4 @@ Make_SAM/old/
 *.bat
 *.org
 Make_IO/run_all.gms
+*.txt
