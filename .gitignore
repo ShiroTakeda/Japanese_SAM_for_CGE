@@ -18,3 +18,10 @@ Make_SAM/old/
 *.org
 Make_IO/run_all.gms
 *.txt
+Make_IO/data_check/CGE_how_to/
+Make_IO/run_aggr_test.gms
+Make_SAM/IO_data/japan_2005_15x13.xlsm
+Make_SAM/IO_data/japan_2005_15x13.xlsx
+Make_SAM/IO_data/japan_2005_51x42.xlsm
+Make_SAM/IO_data/japan_2005_51x42.xlsx
+Make_SAM/IO_data/SAM_for_CGE_template.xlsm
