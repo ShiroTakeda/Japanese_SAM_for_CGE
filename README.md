@@ -45,7 +45,7 @@
 
 + https://www.soumu.go.jp/toukei_toukatsu/data/io/index.htm
 
-#### データ
+#### 産業連関表のデータ
 
 https://www.soumu.go.jp/toukei_toukatsu/data/io/ichiran.htm
 
@@ -53,7 +53,7 @@ https://www.soumu.go.jp/toukei_toukatsu/data/io/ichiran.htm
 + 2011年表: 総務省，平成23年（2011年）産業連関表．
 + 2005年表: 総務省，平成17年（2005年）産業連関表．
 
-#### 解説書
+#### 産業連関表の解説書
 
 + 総務省（2020）『平成27年（2015年）産業連関表－総合解説編－』，
   https://www.soumu.go.jp/toukei_toukatsu/data/io/015index.html
