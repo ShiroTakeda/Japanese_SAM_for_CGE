@@ -1,0 +1,138 @@
+$ontext
+
+このファイルでは以下の 4 つの集合（set）を定義．
+
+・統合後の行部門の集合 (row)
+・統合後の列部門の集合 (col) ．
+・統合後の付加価値部門の集合 (va) ．
+・統合後の最終需要部門の集合 (fd)
+
+$offtext
+
+set     row     行部門 (51) /
+agr     農林水産業
+min     鉱業（化石燃料以外）
+coa     石炭
+oil     原油
+gas     天然ガス
+foo     食料品
+txt     繊維製品
+ppp     パルプ・紙・木製品
+chm     化学製品
+gso     ガソリン
+jet     ジェット燃料油
+ker     灯油
+loi     軽油
+hoa     A重油
+hob     B重油・C重油
+nap     ナフサ
+lpg     液化石油ガス（LPG）
+opp     その他の石油製品
+cok     コークス
+cop     その他の石炭製品
+csc     窯業・土石製品
+cem     セメント
+i_s     鉄鋼
+nfm     非鉄金属
+met     金属製品
+gma     一般機械
+ema     電気機械
+teq     輸送機械
+pin     精密機械
+oma     その他の製造工業製品
+con     建設
+ely     電力
+g_h     ガス・熱供給
+wwm     水道
+com     商業
+fin     金融・保険
+res     不動産
+rai     鉄道輸送
+r_p     道路旅客輸送
+r_f     道路貨物輸送
+o_p     自家輸送（旅客自動車）
+o_f     自家輸送（貨物自動車）
+wat     水運
+air     航空輸送
+otr     その他の輸送
+c_b     情報通信
+e_r     教育・研究
+mhs     医療・保険・社会保障・介護
+bus     対事業所サービス
+per     対個人サービス
+ggo     政府サービス
+/;
+
+set     col     列部門 (42) /
+agr     農林水産業
+min     鉱業（化石燃料以外）
+f_f     鉱業（化石燃料）
+foo     食料品
+txt     繊維製品
+ppp     パルプ・紙・木製品
+chm     化学製品
+pet     石油製品
+cop     石炭製品
+csc     窯業・土石製品
+cem     セメント
+i_s     鉄鋼
+nfm     非鉄金属
+met     金属製品
+gma     一般機械
+ema     電気機械
+teq     輸送機械
+pin     精密機械
+oma     その他の製造工業製品
+con     建設
+e_f     事業用火力発電
+e_n     事業用原子力発電
+e_h     水力・その他の事業用発電
+g_h     ガス・熱供給
+wwm     水道
+com     商業
+fin     金融・保険
+res     不動産
+rai     鉄道輸送
+r_p     道路旅客輸送
+r_f     道路貨物輸送
+o_p     自家輸送（旅客自動車）
+o_f     自家輸送（貨物自動車）
+wat     水運
+air     航空輸送
+otr     その他の輸送
+c_b     
+e_r     教育・研究
+mhs     医療・保険・社会保障・介護
+bus     対事業所サービス
+per     対個人サービス
+ggo     政府サービス
+/;
+
+set     va      付加価値部門 /
+epin    "雇用者所得"
+ssce    "社会保障雇主負担"
+opse    "営業余剰"
+depr    "資本減耗引当"
+idtx    "間接税"
+subs    "補助金"
+/;
+
+set     fd      最終需要部門 /
+hhco    "民間消費"
+gvci    "政府消費（個別）"
+gvcc    "政府消費（集合）"
+invp    "投資（民間）"
+invg    "投資（公的）"
+stck    "在庫投資"
+expo    "輸出"
+impo    "輸入"
+imta    "関税"
+imtx    "輸入品商品税"
+/;
+        
+* --------------------
+* Local Variables:
+* mode: gams
+* fill-column: 80
+* coding: sjis-dos
+* End:
