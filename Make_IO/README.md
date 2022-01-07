@@ -1,3 +1,10 @@
+<!--
+Filename:       README.md
+Author:         Shiro Takeda
+e-mail          <shiro.takeda@gmail.com>
+First-written:  <2020-11-29>
+Time-stamp:     <2022-01-07 12:48:30 st>
+-->
 
 Make_IO フォルダについて説明
 ==============================
