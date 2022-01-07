@@ -3,7 +3,7 @@ Filename:       README.md
 Author:         Shiro Takeda
 e-mail          <shiro.takeda@gmail.com>
 First-written:  <2020-11-29>
-Time-stamp:     <2022-01-07 12:08:27 st>
+Time-stamp:     <2022-01-07 12:24:28 st>
 -->
 
 このフォルダについて
@@ -102,7 +102,7 @@ imtx    "輸入品商品税"
   + 具体的には 統合大分類、統合小分類、13部門など
 
 
-### [「応用一般均衡分析入門」](https://shirotakeda.org/ja/research-ja/cge-howto.html) の第7章のデータ
+### 「応用一般均衡分析入門」の第7章のデータ
 
 [「応用一般均衡分析入門」](https://shirotakeda.org/ja/research-ja/cge-howto.html)
 の第7章で実際に利用されている部門分類のデータを作成したいのなら、2005 年のデータ
