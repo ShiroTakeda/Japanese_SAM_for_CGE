@@ -43,6 +43,7 @@ $offtext
 * $call gams aggr --year=2015 --set_name=japan_2015_37x37_std
 * $call gams aggr --year=2015 --set_name=japan_2015_185x185_std
 * $call gams aggr --year=2015 --set_name=japan_2015_basic_std
+* $call gams aggr --year=2015 --set_name=japan_2015_15x12
 
 *       2011年のデータ用
 * $call gams aggr --year=2011 --set_name=japan_2011_13x13_std
@@ -58,8 +59,6 @@ $call gams aggr --year=2011 --set_name=japan_2011_26x18
 * $call gams aggr --year=2005 --set_name=japan_2005_basic_std
 * $call gams aggr --year=2005 --set_name=japan_2005_15x13
 * $call gams aggr --year=2005 --set_name=japan_2005_51x42
-
-
 
 * --------------------
 * Local Variables:
