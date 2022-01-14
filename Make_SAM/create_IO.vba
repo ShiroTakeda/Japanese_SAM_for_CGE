@@ -105,7 +105,7 @@ Sub IO表の作成()
         row_index(I + num_row) = Cells(i_row + I, i_col + 1).Value
         row_index_en(I + num_row) = Cells(i_row + I, i_col).Value
         
-        If row_index_en(I + num_row) = "wage" Then
+        If row_index_en(I + num_row) = "epin" Then
             num_wage = I + num_row
         End If
         
@@ -344,7 +344,7 @@ Sub IO表の作成()
     
     With Range(cell_t)
         
-        .Formula = "=SUM(D" & i_row & ":" & cell_s & " )"
+        .Formula = "=SUM(C" & i_row & ":" & cell_s & " )"
         .AutoFill Destination:=.Resize(num_row, 1)
     
     End With
@@ -542,7 +542,7 @@ Sub IO表の作成()
     'インデックスの挿入
     i_col = 3
     For I = 1 To num_col
-8        Cells(i_row + 1, i_col).Value = col_index_en(I)
+        Cells(i_row + 1, i_col).Value = col_index_en(I)
         Cells(i_row + 2, i_col).Value = col_index(I)
         i_col = i_col + 1
     Next
@@ -873,6 +873,7 @@ Function Draw_Keisen()
     End With
 
 End Function
+
 
 
 
