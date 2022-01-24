@@ -959,7 +959,6 @@ set va_map(row_bas,va) "付加価値部門用の mapping 用の集合" /
 /;
 
 set fd_map(col_bas,fd) 付加価値部門用の mapping 用の集合 /
-*       民間消費に統合する項目：
 911000.hhco     家計外消費支出（列）
 912100.hhco     家計消費支出
 912200.hhco     対家計民間非営利団体消費支出
