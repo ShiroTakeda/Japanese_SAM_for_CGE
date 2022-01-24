@@ -41,6 +41,7 @@ Sub SAMの作成()
     
     Dim v_adjust As Double              '最後の調整用の変数
     
+    Dim v_tradsur As Double             '貿易収支
     
     
 '======================================================================
@@ -538,7 +539,10 @@ Sub SAMの作成()
 '------------------------------------------------------------
 '   G：家計の消費需要
 
-    cell_s = Cells(6, num_sec + 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    'IOシートの消費の最初の行番号
+    ii_row = num_com + num_com + 40
+
+    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -644,12 +648,27 @@ Sub SAMの作成()
     
     ii_row = num_com * 4 + 52
 
+    v_tradsur = IO!
     
+   
     cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(2) + i_row + 2, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
-    Range(cell_t).Formula = "=IO!" & cell_s
+    '貿易収支の額を取得
+    v_tradsur = Worksheets("IO").Range(cell_s).Value
     
+    If v_tradsur > 0 Then
+    
+        cell_t = Cells(first_index_beg(2) + i_row + 2, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        Range(cell_t).Formula = "=IO!" & cell_s
+        
+       
+    Else
+    
+        cell_t = Cells(first_index_beg(2) + i_row, first_index_beg(2) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        Range(cell_t).Formula = "=-IO!" & cell_s
+    
+    End If
+        
     '色付け
     Range(cell_t).Interior.Color = RGB(253, 233, 217)
     
@@ -830,16 +849,26 @@ Sub SAMの作成()
 '   T: 調整用のセル
     
     cell_s = Cells(tot_num + i_row + 4, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(2) + i_row, first_index_beg(2) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    
+   
+   
     v_adjust = Range(cell_s).Value
     
-    Range(cell_t).Value = v_adjust
+    If v_adjust > 0 Then
+    
+        cell_t = Cells(first_index_beg(2) + i_row, first_index_beg(2) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        Range(cell_t).Value = v_adjust
+        
+    Else
+    
+        cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        Range(cell_t).Value = -v_adjust
+    
+    End If
+        
     
     '色付け
     Range(cell_t).Interior.Color = RGB(235, 241, 222)
-    
+  
     
     
     
@@ -854,6 +883,9 @@ Sub SAMの作成()
 
 
 End Sub
+
+
+
 
 
 
