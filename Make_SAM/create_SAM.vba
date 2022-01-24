@@ -40,7 +40,6 @@ Sub SAMの作成()
     Dim cell_f As String
     
     Dim v_adjust As Double              '最後の調整用の変数
-    
     Dim v_tradsur As Double             '貿易収支
     
     
@@ -194,6 +193,8 @@ Sub SAMの作成()
 '
 '======================================================================
 
+    '一度IOシートを選択しておく
+    Sheets("IO").Select
 
     '既に「SAM」シートがある場合は、それをクリアして使う。
     
@@ -239,7 +240,6 @@ Sub SAMの作成()
         .Style = "Comma [0]"
         .NumberFormatLocal = "#,##0.0"
     End With
-    
  
   
 '======================================================================
@@ -248,12 +248,10 @@ Sub SAMの作成()
 '
 '======================================================================
 
-
     'A1にデータ名を入れておく
     Range("A1").Value = data_Name
     
     Range("B2").Value = "単位:10億円"
-    
 
     '連関表のインデックスの入力（行方向）
     i_row = 5
@@ -311,7 +309,6 @@ Sub SAMの作成()
     Range(Cells(3, 2), Cells(4, 3)).BorderAround Weight:=xlThin, LineStyle:=xlContinuous
 
 
-
 '------------------------------------------------------------
 '   行和・列和
 '------------------------------------------------------------
@@ -367,14 +364,12 @@ Sub SAMの作成()
 '
 '======================================================================
 
-
 '------------------------------------------------------------
 '   A：投入行列
 
     i_row = 4
     i_col = 3
    
-    
     cell_s = Cells(6, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
@@ -393,7 +388,6 @@ Sub SAMの作成()
 
 '------------------------------------------------------------
 '   B：要素への支払い
-
 
     '労働所得
     
@@ -418,7 +412,6 @@ Sub SAMの作成()
         
     End If
         
-    
     '次、資本所得
     cell_s = Cells(num_com + 8, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(num_com + 9, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
@@ -433,11 +426,10 @@ Sub SAMの作成()
     cell_s = Cells(first_index_beg(1) + i_row, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(first_index_beg(1) + i_row + 1, first_index_beg(6) + i_col + num_sec - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     Range(cell_s, cell_f).Interior.Color = RGB(255, 255, 225)
-    
-    
+
+
 '------------------------------------------------------------
 '   C：部門における税の支払い
-
 
     'まず社会保障雇主負担
     
@@ -482,115 +474,30 @@ Sub SAMの作成()
     cell_s = Cells(first_index_beg(3) + i_row, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(first_index_beg(5) + i_row, first_index_beg(6) + i_col + num_sec - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     Range(cell_s, cell_f).Interior.Color = RGB(220, 230, 241)
+    
+
+'------------------------------------------------------------
+'   D: 国内生産（財×財）
+    
+    For I = 1 To num_com
+        For j = 1 To num_sec
+    
+            cell_s = Cells(num_com + 22 + I - 1, 2 + j).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+            cell_t = Cells(first_index_beg(6) + i_row + j - 1, first_index_beg(7) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
         
-    
-'------------------------------------------------------------
-'   D：政府消費需要
-
-    cell_s = Cells(6, num_sec + 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(6, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    With Range(cell_t)
-        .Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
-        .AutoFill Destination:=.Resize(num_com, 1), Type:=xlFillValues
-    End With
+            Range(cell_t).Formula = "=IO!" & cell_s
+        
+        Next
+    Next
     
     '色づけ
-    cell_s = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(first_index_beg(8) + i_row + num_com - 1, first_index_beg(9) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    Range(cell_s, cell_f).Interior.Color = RGB(224, 255, 255)
-    
-    
-'------------------------------------------------------------
-'   E：投資需要
-
-    cell_s = Cells(6, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(6, num_sec + 8).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    With Range(cell_t)
-        .Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
-        .AutoFill Destination:=.Resize(num_com, 1), Type:=xlFillValues
-    End With
-    
-    '色づけ
-    cell_s = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(first_index_beg(8) + i_row + num_com - 1, first_index_beg(9) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    Range(cell_s, cell_f).Interior.Color = RGB(197, 217, 241)
-    
-    
-'------------------------------------------------------------
-'   F：総投資額
-
-    cell_s = Cells(6, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(num_com + 5, num_sec + 8).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(9) + i_row + 1, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    With Range(cell_t)
-        .Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
-    End With
-
-    '色づけ
-    cell_s = Cells(first_index_beg(9) + i_row + 1, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    Range(cell_s).Interior.Color = RGB(255, 255, 225)
-    
-    
-'------------------------------------------------------------
-'   G：家計の消費需要
-
-    'IOシートの消費の最初の行番号
-    ii_row = num_com + num_com + 40
-
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    With Range(cell_t)
-        .Formula = "=IO!" & cell_s
-        .AutoFill Destination:=.Resize(num_com, 1), Type:=xlFillValues
-    End With
-
-    '色づけ
-    cell_s = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(first_index_beg(8) + i_row + num_com - 1, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    Range(cell_s, cell_f).Interior.Color = RGB(242, 220, 219)
+    cell_s = Cells(first_index_beg(6) + i_row, first_index_beg(7) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(first_index_beg(6) + i_row + num_sec - 1, first_index_beg(7) + i_col + num_com - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    Range(cell_s, cell_f).Interior.Color = RGB(218, 238, 243)
 
 
 '------------------------------------------------------------
-'   H：総消費税額
-    
-    'IOシートの消費税の行番号
-    ii_row = num_com + num_com + num_com + 40
-    
-    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(5) + i_row + 1, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    Range(cell_t).Formula = "=IO!" & cell_s
-    
-    '色づけ
-    Range(cell_t).Interior.Color = RGB(235, 241, 222)
-    
-
-
-'------------------------------------------------------------
-'   I: 総家計消費額（税込み）
-    
-    'IOシートの消費額の合計の行番号
-    ii_row = num_com + num_com + num_com + 40
-    
-    '総消費額（税込み）
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(9) + i_row, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    Range(cell_t).Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
-    
-    '色づけ
-    Range(cell_t).Interior.Color = RGB(253, 233, 217)
-    
-    
-'------------------------------------------------------------
-'   K: 輸出額
+'   E: 輸出供給
 
     cell_s = Cells(6, num_sec + 9).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(7) + i_row, first_index_beg(2) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
@@ -604,99 +511,10 @@ Sub SAMの作成()
     cell_s = Cells(first_index_beg(7) + i_row, first_index_beg(2) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(first_index_beg(7) + i_row + num_com - 1, first_index_beg(2) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     Range(cell_s, cell_f).Interior.Color = RGB(220, 230, 241)
-    
-    
-'------------------------------------------------------------
-'   L: 輸入額
 
-    For I = 1 To num_com
-    
-        cell_s = Cells(6 + I - 1, num_sec + 10).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        cell_f = Cells(6 + I - 1, num_sec + 12).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        cell_t = Cells(first_index_beg(2) + i_row + 2, first_index_beg(8) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        
-        Range(cell_t).Formula = "=-IO!" & cell_s & "-IO!" & cell_f
-    
-    Next
-    
-    '色づけ
-    cell_s = Cells(first_index_beg(2) + i_row + 2, first_index_beg(8) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(first_index_beg(2) + i_row + 2, first_index_beg(8) + i_col + num_com - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    Range(cell_s, cell_f).Interior.Color = RGB(228, 223, 236)
-    
-    
-'------------------------------------------------------------
-'   M: 関税額
-    
-    For I = 1 To num_com
-    
-        cell_s = Cells(6 + I - 1, num_sec + 11).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        cell_t = Cells(first_index_beg(5) + i_row + 2, first_index_beg(8) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        
-        Range(cell_t).Formula = "=-IO!" & cell_s
-    
-    Next
-    
-    '色づけ
-    cell_s = Cells(first_index_beg(5) + i_row + 2, first_index_beg(8) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(first_index_beg(5) + i_row + 2, first_index_beg(8) + i_col + num_com - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    Range(cell_s, cell_f).Interior.Color = RGB(253, 233, 217)
 
-    
 '------------------------------------------------------------
-'   N: 海外貯蓄
-    
-    ii_row = num_com * 4 + 52
-
-    v_tradsur = IO!
-    
-   
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    '貿易収支の額を取得
-    v_tradsur = Worksheets("IO").Range(cell_s).Value
-    
-    If v_tradsur > 0 Then
-    
-        cell_t = Cells(first_index_beg(2) + i_row + 2, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        Range(cell_t).Formula = "=IO!" & cell_s
-        
-       
-    Else
-    
-        cell_t = Cells(first_index_beg(2) + i_row, first_index_beg(2) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        Range(cell_t).Formula = "=-IO!" & cell_s
-    
-    End If
-        
-    '色付け
-    Range(cell_t).Interior.Color = RGB(253, 233, 217)
-    
-    
-'------------------------------------------------------------
-'   O: 総供給
-    
-    
-    For I = 1 To num_com
-        For j = 1 To num_sec
-    
-            cell_s = Cells(num_com + 22 + I - 1, 2 + j).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-            cell_t = Cells(first_index_beg(6) + i_row + j - 1, first_index_beg(7) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        
-            Range(cell_t).Formula = "=IO!" & cell_s
-        
-        Next
-    Next
-    
-    
-    '色づけ
-    cell_s = Cells(first_index_beg(6) + i_row, first_index_beg(7) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(first_index_beg(6) + i_row + num_sec - 1, first_index_beg(7) + i_col + num_com - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    Range(cell_s, cell_f).Interior.Color = RGB(218, 238, 243)
-    
-    
-'------------------------------------------------------------
-'   O': 国内供給マトリックス
+'   F: 国内供給マトリックス
     
     ii_row = num_com * 3 + 46
     
@@ -716,9 +534,190 @@ Sub SAMの作成()
     Range(cell_s, cell_f).Interior.Color = RGB(228, 223, 236)
     
     
+'------------------------------------------------------------
+'   G: 輸入
+
+    For I = 1 To num_com
+    
+        cell_s = Cells(6 + I - 1, num_sec + 10).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        cell_f = Cells(6 + I - 1, num_sec + 12).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        cell_t = Cells(first_index_beg(2) + i_row + 2, first_index_beg(8) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        
+        Range(cell_t).Formula = "=-IO!" & cell_s & "-IO!" & cell_f
+    
+    Next
+    
+    '色づけ
+    cell_s = Cells(first_index_beg(2) + i_row + 2, first_index_beg(8) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(first_index_beg(2) + i_row + 2, first_index_beg(8) + i_col + num_com - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    Range(cell_s, cell_f).Interior.Color = RGB(228, 223, 236)
+
     
 '------------------------------------------------------------
-'   P: 要素供給
+'   H: 関税額
+    
+    For I = 1 To num_com
+    
+        cell_s = Cells(6 + I - 1, num_sec + 11).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        cell_t = Cells(first_index_beg(5) + i_row + 2, first_index_beg(8) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        
+        Range(cell_t).Formula = "=-IO!" & cell_s
+    
+    Next
+    
+    '色づけ
+    cell_s = Cells(first_index_beg(5) + i_row + 2, first_index_beg(8) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(first_index_beg(5) + i_row + 2, first_index_beg(8) + i_col + num_com - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    Range(cell_s, cell_f).Interior.Color = RGB(253, 233, 217)
+
+
+'------------------------------------------------------------
+'   I：家計の消費需要
+
+    'IOシートの消費の最初の行番号
+    ii_row = num_com + num_com + 40
+
+    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    With Range(cell_t)
+        .Formula = "=IO!" & cell_s
+        .AutoFill Destination:=.Resize(num_com, 1), Type:=xlFillValues
+    End With
+
+    '色づけ
+    cell_s = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(first_index_beg(8) + i_row + num_com - 1, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    Range(cell_s, cell_f).Interior.Color = RGB(242, 220, 219)
+
+
+'------------------------------------------------------------
+'   J：投資需要
+
+    cell_s = Cells(6, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(6, num_sec + 8).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    With Range(cell_t)
+        .Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
+        .AutoFill Destination:=.Resize(num_com, 1), Type:=xlFillValues
+    End With
+    
+    '色づけ
+    cell_s = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(first_index_beg(8) + i_row + num_com - 1, first_index_beg(9) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    Range(cell_s, cell_f).Interior.Color = RGB(197, 217, 241)
+
+
+'------------------------------------------------------------
+'   K：政府消費需要
+
+    cell_s = Cells(6, num_sec + 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(6, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    With Range(cell_t)
+        .Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
+        .AutoFill Destination:=.Resize(num_com, 1), Type:=xlFillValues
+    End With
+    
+    '色づけ
+    cell_s = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(first_index_beg(8) + i_row + num_com - 1, first_index_beg(9) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    Range(cell_s, cell_f).Interior.Color = RGB(224, 255, 255)
+    
+    
+'------------------------------------------------------------
+'   L：総投資額
+
+    cell_s = Cells(6, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(num_com + 5, num_sec + 8).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_t = Cells(first_index_beg(9) + i_row + 1, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    With Range(cell_t)
+        .Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
+    End With
+
+    '色づけ
+    cell_s = Cells(first_index_beg(9) + i_row + 1, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    Range(cell_s).Interior.Color = RGB(255, 255, 225)
+
+
+'------------------------------------------------------------
+'   M：総消費税額
+    
+    'IOシートの消費税の行番号
+    ii_row = num_com + num_com + num_com + 40
+    
+    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_t = Cells(first_index_beg(5) + i_row + 1, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    Range(cell_t).Formula = "=IO!" & cell_s
+    
+    '色づけ
+    Range(cell_t).Interior.Color = RGB(235, 241, 222)
+
+
+'------------------------------------------------------------
+'   N: 総家計消費額（消費税込み）
+    
+    'IOシートの消費額の合計の行番号
+    ii_row = num_com + num_com + num_com + 40
+    
+    '総消費額（税込み）
+    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_t = Cells(first_index_beg(9) + i_row, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    Range(cell_t).Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
+    
+    '色づけ
+    Range(cell_t).Interior.Color = RGB(253, 233, 217)
+    
+    
+'------------------------------------------------------------
+'   O: 総政府消費額
+    
+    cell_s = Cells(6, num_sec + 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(5 + num_com, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_t = Cells(first_index_beg(9) + i_row + 2, first_index_beg(2) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    Range(cell_t).Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
+    
+    '色付け
+    Range(cell_t).Interior.Color = RGB(218, 238, 243)
+
+
+'------------------------------------------------------------
+'   P: 海外貯蓄（or 海外からの投資）
+    
+    ii_row = num_com * 4 + 52
+
+    v_tradsur = IO!
+   
+    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    
+    '貿易収支の額を取得
+    v_tradsur = Worksheets("IO").Range(cell_s).Value
+    
+    If v_tradsur > 0 Then
+    
+        cell_t = Cells(first_index_beg(2) + i_row + 2, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        Range(cell_t).Formula = "=IO!" & cell_s
+        
+    Else
+    
+        cell_t = Cells(first_index_beg(2) + i_row, first_index_beg(2) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        Range(cell_t).Formula = "=-IO!" & cell_s
+    
+    End If
+        
+    '色付け
+    Range(cell_t).Interior.Color = RGB(253, 233, 217)
+    
+    
+'------------------------------------------------------------
+'   Q: 要素供給
     
     ii_row = num_com * 2 + 32
     
@@ -734,7 +733,6 @@ Sub SAMの作成()
     
     Range(cell_t).Formula = "=IO!" & cell_s
     
-    
     '色づけ
     cell_s = Cells(first_index_beg(2) + i_row, first_index_beg(1) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(first_index_beg(2) + i_row, first_index_beg(1) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
@@ -742,7 +740,7 @@ Sub SAMの作成()
     
 
 '------------------------------------------------------------
-'   Q: 所得税
+'   R: 要素所得への税
     
     ii_row = num_com * 2 + 32
 
@@ -761,9 +759,8 @@ Sub SAMの作成()
     
     
 '------------------------------------------------------------
-'   R: 各種の税の総額
+'   S: 各種の税の総額
 
-    
     'まず生産税
     cell_s = Cells(num_com + 10, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(num_com + 11, num_sec + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
@@ -817,7 +814,6 @@ Sub SAMの作成()
         Range(cell_t).Formula = 0
         
     End If
-        
     
     '産業側での資本課税はなし
     cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(3) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
@@ -828,22 +824,7 @@ Sub SAMの作成()
     cell_s = Cells(first_index_beg(2) + i_row + 1, first_index_beg(3) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(first_index_beg(2) + i_row + 1, first_index_beg(5) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     Range(cell_s, cell_f).Interior.Color = RGB(235, 230, 210)
-    
-    
-    
-'------------------------------------------------------------
-'   S: 総政府消費額
-    
-    cell_s = Cells(6, num_sec + 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(5 + num_com, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_t = Cells(first_index_beg(9) + i_row + 2, first_index_beg(2) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    
-    Range(cell_t).Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
-    
-    '色付け
-    Range(cell_t).Interior.Color = RGB(218, 238, 243)
-    
-    
+
     
 '------------------------------------------------------------
 '   T: 調整用のセル
@@ -868,8 +849,6 @@ Sub SAMの作成()
     
     '色付け
     Range(cell_t).Interior.Color = RGB(235, 241, 222)
-  
-    
     
     
 '======================================================================
@@ -878,14 +857,7 @@ Sub SAMの作成()
 '
 '======================================================================
     
-    
     Range("A1").Select
 
-
 End Sub
-
-
-
-
-
 
