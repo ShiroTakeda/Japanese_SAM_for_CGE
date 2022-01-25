@@ -5,7 +5,9 @@
 ## このパッケージ（プログラム群）の概要
 
 + これは日本を対象とした応用一般均衡分析（computable general equilibrium
-  analysis、以下 CGE分析）用の SAM データを作成するためのパッケージです。
+  analysis、以下 CGE分析）用の産業連関表、SAM データを作成するためのパッケージで
+  す。
+  + データ（部門）の統合などもおこなえます。
 + 注: ここでの「SAM」とは「社会会計表（social accounting matrix）」のことです。
 
 
