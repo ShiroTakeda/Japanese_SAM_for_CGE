@@ -58,9 +58,9 @@ Make_SAM フォルダについての説明
 「SAM」というシートが作成され、そこに SAM が出力されます。
 
 ここで作成される SAM は [「応用一般均衡分析入
-門」](https://shirotakeda.org/ja/research-ja/cge-howto.html) の第7章で作成されて
-いるものと同じようなものです。SAM の意味については「応用一般均衡分析入門」を見て
-ください。
+門」](https://shirotakeda.github.io/ja/research-ja/cge-howto.html) の第7章で作成
+されているものと同じようなものです。SAM の意味については「応用一般均衡分析入門」
+を見てください。
 
 「応用一般均衡分析入門」の第7章で実際に利用されている部門分類のデータを作成した
 いのなら、Make_IO の方で 2015 年の産業連関表から `japan_2015_15x12.set`、

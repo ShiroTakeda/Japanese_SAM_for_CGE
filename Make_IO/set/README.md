@@ -3,7 +3,7 @@ Filename:       README.md
 Author:         Shiro Takeda
 e-mail          <shiro.takeda@gmail.com>
 First-written:  <2020-11-29>
-Time-stamp:     <2022-01-07 12:24:28 st>
+Time-stamp:     <2022-02-23 11:34:21 st>
 -->
 
 このフォルダについて
@@ -60,7 +60,8 @@ Time-stamp:     <2022-01-07 12:24:28 st>
     Studio の既定の設定は UTF-8なので）。
   + Windows のシステムロケールをユニコード（utf-8）に変更すれば gdxxrw は UTF-8
     になるが、そうすると他のソフトウェアが正常に動かなくなる可能性があります。
-  + この問題については次のページを見てください: [GAMS における文字コード \| 武田史郎のウェブログ](https://shirotakeda.org/blog-ja/?p=4102)
+  + この問題については次のページを見てください: [GAMS における文字コード \| 武田
+    史郎のウェブログ](https://shiro-takeda.hateblo.jp/entry/%3Fp%3D4102)
 
 
 #### 統合後の部門の名前について
@@ -104,10 +105,10 @@ imtx    "輸入品商品税"
 
 ### 「応用一般均衡分析入門」の第7章のデータ
 
-[「応用一般均衡分析入門」](https://shirotakeda.org/ja/research-ja/cge-howto.html)
-の第7章で実際に利用されている部門分類のデータを作成したいのなら、2005 年のデータ
-から`japan_2005_15x13.set`、 `japan_2005_51x42.set` を使ってデータを作成してくだ
-さい。
+[「応用一般均衡分析入
+門」](https://shirotakeda.github.io/ja/research-ja/cge-howto.html)の第7章で実際
+に利用されている部門分類のデータを作成したいのなら、2005 年のデータから
+`japan_2005_15x13.set`、 `japan_2005_51x42.set` を使ってデータを作成してください。
 
 
 
