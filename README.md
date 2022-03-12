@@ -101,6 +101,13 @@ http://www.cger.nies.go.jp/publications/report/d031/jpn/datafile/index.htm
 データを一度 GDX ファイルに出力した後の部分は Mac でも利用できると思います（他に
 も gdxxrw を利用している部分はありますが）。
 
+## 文字コードについて
+
+日本語が含まれるファイルは文字コードに Shift JIS コードを指定しています。これは
+[「GAMS における文字コード」](https://shiro-takeda.hateblo.jp/entry/%3Fp%3D4102)
+で説明している問題のためです。日本語が含まれるファイルを GAMS Studio で開く場合
+には文字コードに Shift JIS コードを指定してください。
+
 
 
 <!--
