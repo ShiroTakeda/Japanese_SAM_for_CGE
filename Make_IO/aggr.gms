@@ -415,9 +415,9 @@ $ontext
 
 $offtext
 
-execute_unload '%output_file%.gdx', row, col, va, fd, set_vt, io_u, io_v, io_fd,
-    io_va, io_q, io_q_v, io_co2, io_table, meta_data, chk_data, chk_va, chk_fd,
-    chk_col_out, chk_row_out, chk_co2_use, chk_co2_so, chk_trade
+execute_unload '%output_file%.gdx', row, col, va, fd, set_vt, row_bas, io_u,
+    io_v, io_fd, io_va, io_q, io_q_v, io_co2, io_table, meta_data, chk_data,
+    chk_va, chk_fd, chk_col_out, chk_row_out, chk_co2_use, chk_co2_so, chk_trade
 
 
 $onecho > temp.txt
@@ -467,6 +467,9 @@ text="Data check for %set_name%" rng=Check_CO2!A1
 text="Unit: value -> MtCO2" rng=Check_CO2!A3
 text="CO2 (use)" rng=Check_CO2!A4 par=chk_co2_use rng=Check_CO2!A5 rdim=1 cdim=1
 text="CO2 (source)" rng=Check_CO2!E4 par=chk_co2_so rng=Check_CO2!E5 rdim=1 cdim=1
+
+*       物量用のインデックス    
+text="row_bas" rng=Q_set!A3 set=row_bas rng=Q_set!A4 rdim=1
 
 *       Check_Q
 text="物量表" rng=Q_table!A1 par=io_q rng=Q_table!A3 rdim=1 cdim=1
