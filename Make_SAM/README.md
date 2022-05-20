@@ -49,13 +49,17 @@ IO_data というフォルダで作業をするので、Make_IO フォルダで�
 
 とします。
 
-これで、「IO」というシートが作成され、SAM を作成する元になる IO 表などが作成されます。
+これで、「IO」というシートが作成され、SAM を作成する元になる IO 表などが作成され
+ます。[japan_2011_26x18.xlsm](IO_data/japan_2011_26x18.xlsm) の中の「IO」シート
+のような表です。
 
 
 ### Step 4
 
 次に「SAMの作成」というマクロを実行します（実行手順は上とほぼ同じです）。すると、
 「SAM」というシートが作成され、そこに SAM が出力されます。
+[japan_2011_26x18.xlsm](IO_data/japan_2011_26x18.xlsm) の中の「SAM」シートのよう
+なSAMです。
 
 ここで作成される SAM は [「応用一般均衡分析入
 門」](https://shirotakeda.github.io/ja/research-ja/cge-howto.html) の第7章で作成
