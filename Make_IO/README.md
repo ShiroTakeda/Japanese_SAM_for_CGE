@@ -3,7 +3,7 @@ Filename:       README.md
 Author:         Shiro Takeda
 e-mail          <shiro.takeda@gmail.com>
 First-written:  <2020-11-29>
-Time-stamp:     <2022-01-07 12:48:30 st>
+Time-stamp:     <2022-05-20 18:18:33 st>
 -->
 
 Make_IO フォルダについて説明
@@ -131,9 +131,14 @@ Make_IO フォルダについて説明
     
 の `YYYY` の部分には set & map ファイルの名前（拡張子を除いた部分）を指定します。
 
-これを実行すると、統合されたデータが aggr_data フォルダの `japan_2011_26x18.gdx`
-というファイルに出力され、さらに data_check フォルダの`japan_2011_26x18.xlsx` と
-いうファイルにその中身（の一部）が出力されます。
+これを実行すると、統合されたデータが aggr_data フォルダの
+`japan_2011_26x18.gdx`というファイルに出力され、さらに data_check フォルダの
+`japan_2011_26x18.xlsx` というファイルにその中身（の一部）が出力されます。
+
+`japan_2011_26x18.gdx` の中に CGE 分析に利用するデータが全部入っていると言っても
+よく、これを使えば済んでしまうのですが、Make_SAM フォルダの方で
+`japan_2011_26x18.xlsx` のデータを用いて SAM を作成します。
+
 
 
 #### set ファイルの設定
