@@ -22,6 +22,11 @@ CO2 のデータ（3EIDのデータ）を利用するのなら、fl_use_co2 に非ゼロを設定する。利
 
 $offtext
 
+*       ------------------------------------------------------------
+display "@ コントロール変数の定義";
+
+*       ------------------------------------------------------------
+
 *       ディレクトリの区切り文字列
 $setglobal fs %system.dirsep%
 
@@ -49,8 +54,9 @@ display "map_file = %map_file%";
 display "output_file = %output_file%";
 
 *       ----------------------------------------------------------------------
-*       インデックスの import:
 display "@ インデックスの import:";
+
+*       ----------------------------------------------------------------------
 
 $include .%fs%set%fs%basic_code_%year%.gms
 
@@ -58,8 +64,9 @@ display row_bas, row_st, row_va, row_ind, col_bas, col_st, col_fd, col_fd_imp,
         col_fd_, col_exp, col_imp, col_mar, col_ind;
 
 *       ----------------------------------------------------------------------
-*       統合前のデータの import
 display "@ 統合前のデータの import";
+
+*       ----------------------------------------------------------------------
 
 $gdxin .%fs%data%fs%japan_io_%year%.gdx
 
@@ -76,8 +83,9 @@ $load iotable_u, iotable_v, iotable_va, iotable_fd, iotable_q, iotable_q_v
 display iotable_u, iotable_v, iotable_fd, iotable_va, iotable_q, iotable_q_v;
 
 *       ----------------------------------------------------------------------
-*       統合用の集合の定義を import
 display "@ 統合用の集合の定義を import";
+
+*       ----------------------------------------------------------------------
 
 $include %set_file%
 
@@ -132,8 +140,9 @@ err_so(row_va) = no;
 err_tg(va) = no;
 
 *       ----------------------------------------------------------------------
-*       データの統合:
 display "@ データの統合";
+
+*       ----------------------------------------------------------------------
 
 set
     so          Source          / dom, imp, oth /
@@ -157,6 +166,11 @@ parameter
     io_q(*,*)           "Aggregated IO table (quantity)"
     io_q_v(*,*)         "Aggregated IO table (value for quantity), bil yen"
 ;
+
+*       ------------------------------------------------------------
+display "@@ 金額データの統合";
+*       ------------------------------------------------------------
+
 *       まず U table:
 io_u(row,col,so)
     = sum(row_ind$row_map(row_ind,row),
@@ -164,7 +178,6 @@ io_u(row,col,so)
             iotable_u(row_ind,col_ind,so)));
 
 io_u(row,col,so) = io_u(row,col,so) * sc_unit;
-
 
 *       次、V table:
 io_v(row,col)
@@ -192,8 +205,9 @@ io_fd(row,fd,so)
 
 io_fd(row,fd,so) = io_fd(row,fd,so) * sc_unit;
 
-
-*       物量
+*       ------------------------------------------------------------
+display "@@ 物量データの統合";
+*       ------------------------------------------------------------
 $ontext
 物量については列部門のみを統合。
 $offtext
@@ -241,8 +255,9 @@ set_vt(row,col) = no;
 set_vt(row,col)$io_v(row,col) = yes;
 display set_vt;
 
-*       ----------------------------------------------------------------------
-*       CO2排出量データの統合
+*       ------------------------------------------------------------
+display "@@ CO2排出量データの統合";
+*       ------------------------------------------------------------
 
 parameter
     iotable_co2_data(*,*)    "CO2 emissions (MtCO2)";
@@ -278,13 +293,6 @@ io_co2(row,"sum") = sum(col, io_co2(row,col))
 option io_co2:3;
 display io_co2;
 
-parameter    meta_data;
-meta_data("行部門","value") = card(row);
-meta_data("列部門","value") = card(col);
-meta_data("付加価値部門","value") = card(va);
-meta_data("最終需要部門","value") = card(fd);
-display meta_data;
-
 parameter check_io_co2;
 
 check_io_co2(row,col) = io_co2(row,col);
@@ -300,10 +308,19 @@ check_io_co2("sum","sum") =
 display check_io_co2;
 
 *       ------------------------------------------------------------
-
-display "@ ";
+display "@@ その他";
 *       ------------------------------------------------------------
 
+parameter    meta_data;
+meta_data("行部門","value") = card(row);
+meta_data("列部門","value") = card(col);
+meta_data("付加価値部門","value") = card(va);
+meta_data("最終需要部門","value") = card(fd);
+display meta_data;
+
+$ontext
+ここまでの金額データを io_table にまとめて入れておく。
+$offtext
 parameter
     io_table     "連関表"
 ;
@@ -316,6 +333,9 @@ io_table(row,"Total") = sum(col, io_table(row,col)) + sum(fd, io_table(row,fd));
 option io_table:0;
 display io_table;
 
+*       ------------------------------------------------------------
+display "@@ 統合したデータのチェック";
+*       ------------------------------------------------------------
 
 parameter
     chk_row             "IO table (tril.yen)"
@@ -408,8 +428,9 @@ display chk_co2_so;
 
 
 *       ----------------------------------------------------------------------
-*       データの export
 display "@ データの export";
+
+*       ----------------------------------------------------------------------
 $ontext
 データを GDX ファイルにエクスポート．
 
@@ -468,7 +489,7 @@ text="Unit: value -> MtCO2" rng=Check_CO2!A3
 text="CO2 (use)" rng=Check_CO2!A4 par=chk_co2_use rng=Check_CO2!A5 rdim=1 cdim=1
 text="CO2 (source)" rng=Check_CO2!E4 par=chk_co2_so rng=Check_CO2!E5 rdim=1 cdim=1
 
-*       物量用のインデックス    
+*       物量用のインデックス
 text="row_bas" rng=Q_set!A3 set=row_bas rng=Q_set!A4 rdim=1
 
 *       Check_Q
