@@ -103,11 +103,11 @@ http://www.cger.nies.go.jp/publications/report/d031/jpn/datafile/index.htm
 
 ## 文字コードについて
 
-日本語が含まれるファイルは文字コードに Shift JIS コードを指定しています。これは
-[「GAMS における文字コード」](https://shiro-takeda.hateblo.jp/entry/%3Fp%3D4102)
-で説明している問題のためです。日本語が含まれるファイルを GAMS Studio で開く場合
-には文字コードに Shift JIS コードを指定してください。
-
+日本語が含まれる一部のファイルの文字コードを Shift JIS コードに指定しています
+（Shift JIS ではないものは UTF-8 を指定）。これは[「GAMS における文字コー
+ド」](https://shiro-takeda.hateblo.jp/entry/%3Fp%3D4102)で説明している問題のため
+です。日本語が含まれるファイルを GAMS Studio で開いて文字化けした場合には、文字
+コードを変更してみてください（Shift JIS か UTF-8 のどちらかです）。
 
 
 <!--

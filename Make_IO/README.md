@@ -3,7 +3,7 @@ Filename:       README.md
 Author:         Shiro Takeda
 e-mail          <shiro.takeda@gmail.com>
 First-written:  <2020-11-29>
-Time-stamp:     <2022-05-21 15:50:07 st>
+Time-stamp:     <2022-05-21 15:53:32 st>
 -->
 
 Make_IO フォルダについて説明
@@ -106,6 +106,11 @@ Make_IO フォルダについて説明
 
 この結果、`japan_io_2015_co2.gdx`、`japan_io_2011_co2.gdx`、
 `japan_io_2005_co2.gdx` という3つのファイルが data フォルダに作成されます。
+
+#### 注
+
++ ここでも Excel ファイル → GDX ファイルの部分で gdxxrw を利用しています
+  （Windows でないと実行できません）。
 
 
 ### □ ステップ4: 部門の統合（run_aggr.gms）
