@@ -370,7 +370,7 @@ Sub SAMの作成()
     i_row = 4
     i_col = 3
    
-    cell_s = Cells(6, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(6, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -391,10 +391,10 @@ Sub SAMの作成()
 
     '労働所得
     
-    cell_s = Cells(num_com + 6, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(num_com + 6, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(1) + i_row, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
-    cell_f = Cells(num_com + 7, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(num_com + 7, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
 
     If fl_ssce = 0 Then
     
@@ -413,8 +413,8 @@ Sub SAMの作成()
     End If
         
     '次、資本所得
-    cell_s = Cells(num_com + 8, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(num_com + 9, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(num_com + 8, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(num_com + 9, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(1) + i_row + 1, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -433,7 +433,7 @@ Sub SAMの作成()
 
     'まず社会保障雇主負担
     
-    cell_s = Cells(num_com + 7, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(num_com + 7, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(3) + i_row, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
         
     If fl_ssce = 0 Then
@@ -461,8 +461,8 @@ Sub SAMの作成()
     End With
     
     '生産税
-    cell_s = Cells(num_com + 10, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(num_com + 11, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(num_com + 10, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(num_com + 11, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(5) + i_row, first_index_beg(6) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -482,7 +482,7 @@ Sub SAMの作成()
     For I = 1 To num_com
         For j = 1 To num_sec
     
-            cell_s = Cells(num_com + 22 + I - 1, 2 + j).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+            cell_s = Cells(num_com + 22 + I - 1, 3 + j).Address(RowAbsolute:=False, ColumnAbsolute:=False)
             cell_t = Cells(first_index_beg(6) + i_row + j - 1, first_index_beg(7) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
         
             Range(cell_t).Formula = "=IO!" & cell_s
@@ -499,7 +499,7 @@ Sub SAMの作成()
 '------------------------------------------------------------
 '   E: 輸出供給
 
-    cell_s = Cells(6, num_sec + 9).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(6, num_sec + 10).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(7) + i_row, first_index_beg(2) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -518,7 +518,7 @@ Sub SAMの作成()
     
     ii_row = num_com * 3 + 46
     
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(7) + i_row, first_index_beg(8) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -539,8 +539,8 @@ Sub SAMの作成()
 
     For I = 1 To num_com
     
-        cell_s = Cells(6 + I - 1, num_sec + 10).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-        cell_f = Cells(6 + I - 1, num_sec + 12).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        cell_s = Cells(6 + I - 1, num_sec + 11).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        cell_f = Cells(6 + I - 1, num_sec + 13).Address(RowAbsolute:=False, ColumnAbsolute:=False)
         cell_t = Cells(first_index_beg(2) + i_row + 2, first_index_beg(8) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
         
         Range(cell_t).Formula = "=-IO!" & cell_s & "-IO!" & cell_f
@@ -558,7 +558,7 @@ Sub SAMの作成()
     
     For I = 1 To num_com
     
-        cell_s = Cells(6 + I - 1, num_sec + 11).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+        cell_s = Cells(6 + I - 1, num_sec + 12).Address(RowAbsolute:=False, ColumnAbsolute:=False)
         cell_t = Cells(first_index_beg(5) + i_row + 2, first_index_beg(8) + i_col + I - 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
         
         Range(cell_t).Formula = "=-IO!" & cell_s
@@ -577,7 +577,7 @@ Sub SAMの作成()
     'IOシートの消費の最初の行番号
     ii_row = num_com + num_com + 40
 
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -594,8 +594,8 @@ Sub SAMの作成()
 '------------------------------------------------------------
 '   J：投資需要
 
-    cell_s = Cells(6, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(6, num_sec + 8).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(6, num_sec + 7).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(6, num_sec + 9).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -612,8 +612,8 @@ Sub SAMの作成()
 '------------------------------------------------------------
 '   K：政府消費需要
 
-    cell_s = Cells(6, num_sec + 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(6, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(6, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(6, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(8) + i_row, first_index_beg(9) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -630,8 +630,8 @@ Sub SAMの作成()
 '------------------------------------------------------------
 '   L：総投資額
 
-    cell_s = Cells(6, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(num_com + 5, num_sec + 8).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(6, num_sec + 7).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(num_com + 5, num_sec + 9).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(9) + i_row + 1, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -649,7 +649,7 @@ Sub SAMの作成()
     'IOシートの消費税の行番号
     ii_row = num_com + num_com + num_com + 40
     
-    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(5) + i_row + 1, first_index_beg(9) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=IO!" & cell_s
@@ -665,8 +665,8 @@ Sub SAMの作成()
     ii_row = num_com + num_com + num_com + 40
     
     '総消費額（税込み）
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(ii_row, 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(9) + i_row, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
@@ -678,8 +678,8 @@ Sub SAMの作成()
 '------------------------------------------------------------
 '   O: 総政府消費額
     
-    cell_s = Cells(6, num_sec + 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(5 + num_com, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(6, num_sec + 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(5 + num_com, num_sec + 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(9) + i_row + 2, first_index_beg(2) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
@@ -695,7 +695,7 @@ Sub SAMの作成()
 
     v_tradsur = IO!
    
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     '貿易収支の額を取得
     v_tradsur = Worksheets("IO").Range(cell_s).Value
@@ -722,13 +722,13 @@ Sub SAMの作成()
     ii_row = num_com * 2 + 32
     
     '粗労働所得
-    cell_s = Cells(ii_row, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row, first_index_beg(1) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=IO!" & cell_s
     
     '粗資本所得
-    cell_s = Cells(ii_row + 1, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row + 1, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row, first_index_beg(1) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=IO!" & cell_s
@@ -744,7 +744,7 @@ Sub SAMの作成()
     
     ii_row = num_com * 2 + 32
 
-    cell_s = Cells(ii_row, 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(4) + i_row, first_index_beg(2) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     With Range(cell_t)
@@ -762,8 +762,8 @@ Sub SAMの作成()
 '   S: 各種の税の総額
 
     'まず生産税
-    cell_s = Cells(num_com + 10, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(num_com + 11, num_sec + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(num_com + 10, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(num_com + 11, num_sec + 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(5) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=sum(IO!" & cell_s & ":IO!" & cell_f & ")"
@@ -773,14 +773,14 @@ Sub SAMの作成()
     'IOシートの消費額の合計の行番号
     ii_row = num_com + num_com + num_com + 40
     
-    cell_s = Cells(ii_row, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(5) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=IO!" & cell_s
 
     '総関税額
-    cell_s = Cells(6, num_sec + 11).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(6 + num_com, num_sec + 11).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(6, num_sec + 12).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(6 + num_com, num_sec + 12).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(5) + i_col + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=-sum(IO!" & cell_s & ":IO!" & cell_f & ")"
@@ -789,20 +789,20 @@ Sub SAMの作成()
     ii_row = num_com * 2 + 32
     
     '労働所得税
-    cell_s = Cells(ii_row, 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row, 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(4) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=IO!" & cell_s
 
     '資本所得税
-    cell_s = Cells(ii_row + 1, 5).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(ii_row + 1, 6).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(4) + i_col + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     Range(cell_t).Formula = "=IO!" & cell_s
     
     '社会保障負担
-    cell_s = Cells(num_com + 7, 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
-    cell_f = Cells(num_com + 7, num_sec + 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_s = Cells(num_com + 7, 4).Address(RowAbsolute:=False, ColumnAbsolute:=False)
+    cell_f = Cells(num_com + 7, num_sec + 3).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_t = Cells(first_index_beg(2) + i_row + 1, first_index_beg(3) + i_col).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     If fl_ssce = 0 Then
@@ -860,4 +860,5 @@ Sub SAMの作成()
     Range("A1").Select
 
 End Sub
+
 
