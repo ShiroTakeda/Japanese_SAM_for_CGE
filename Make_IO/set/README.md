@@ -3,7 +3,7 @@ Filename:       README.md
 Author:         Shiro Takeda
 e-mail          <shiro.takeda@gmail.com>
 First-written:  <2020-11-29>
-Time-stamp:     <2022-02-23 11:34:21 st>
+Time-stamp:     <2022-09-14 14:34:28 st>
 -->
 
 このフォルダについて
@@ -61,7 +61,7 @@ Time-stamp:     <2022-02-23 11:34:21 st>
   + Windows のシステムロケールをユニコード（utf-8）に変更すれば gdxxrw は UTF-8
     になるが、そうすると他のソフトウェアが正常に動かなくなる可能性があります。
   + この問題については次のページを見てください: [GAMS における文字コード \| 武田
-    史郎のウェブログ](https://shiro-takeda.hateblo.jp/entry/%3Fp%3D4102)
+    史郎のウェブログ](https://shiro-takeda.hateblo.jp/entry/4102)
 
 
 #### 統合後の部門の名前について
