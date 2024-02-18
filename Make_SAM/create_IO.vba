@@ -281,14 +281,14 @@ Sub IO表の作成()
         i_col = i_col + 1
     Next
     
-    'Value_data シートからデータをコピーする
+    'IO_table シートからデータをコピーする
     
     'コピー元のセルの指定
     cell_s = Cells(4, 2).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     cell_f = Cells(int_len_r + 3, int_len_c + 1).Address(RowAbsolute:=False, ColumnAbsolute:=False)
     
     'セルのコピー
-    Worksheets("Value_data").Range(cell_s, cell_f).Copy
+    Worksheets("IO_table").Range(cell_s, cell_f).Copy
     
     '貼り付け
     Range("D6").PasteSpecial Paste:=xlPasteValues

@@ -22,6 +22,9 @@ CO2 のデータ（3EIDのデータ）を利用するのなら、fl_use_co2 に非ゼロを設定する。利
 
 $offtext
 
+$setglobal year 2015
+$setglobal set_name japan_2015_24x14
+
 *       ------------------------------------------------------------
 display "@ コントロール変数の定義";
 
@@ -322,7 +325,8 @@ $ontext
 ここまでの金額データを io_table にまとめて入れておく。
 $offtext
 parameter
-    io_table     "連関表"
+    io_table     	"連関表"
+    io_value_data	"連関表（国内財&輸入財を区別）"
 ;
 io_table(row,col) = sum(so, io_u(row,col,so)) + eps;
 io_table(va,col) = io_va(va,col) + eps;
@@ -332,6 +336,39 @@ io_table(row,"Total") = sum(col, io_table(row,col)) + sum(fd, io_table(row,fd));
 
 option io_table:0;
 display io_table;
+
+io_value_data(row,so,col) = io_u(row,col,so) + eps;
+io_value_data(row,"oth",col) = 0;
+io_value_data(va,"dom",col) = io_va(va,col) + eps;
+io_value_data(row,so,fd) = io_fd(row,fd,so) + eps;
+io_value_data(row,"oth",fd) = 0;
+io_value_data(row,"dom","expo") = io_fd(row,"expo","oth") + eps;
+io_value_data(row,"imp","impo") = io_fd(row,"impo","oth") + eps;
+io_value_data(row,"imp","imta") = io_fd(row,"imta","oth") + eps;
+io_value_data(row,"imp","imtx") = io_fd(row,"imtx","oth") + eps;
+
+io_value_data(row,"oth",fd) = 0;
+io_value_data(row,"oth","expo") = 0;
+io_value_data(row,"oth","impo") = 0;
+io_value_data(row,"oth","imta") = 0;
+io_value_data(row,"oth","imtx") = 0;
+
+io_value_data("sum","sum",col) =
+    sum((row,so), io_value_data(row,so,col))
+    + sum((va,so), io_value_data(va,so,col))
+;
+
+io_value_data(row,"dom","sum") =
+    sum(col, io_value_data(row,"dom",col))
+    + sum(fd, io_value_data(row,"dom",fd));
+;
+io_value_data(row,"imp","sum") =
+    sum(col, io_value_data(row,"imp",col))
+    + sum(fd, io_value_data(row,"imp",fd));
+;
+
+option io_value_data:0;
+display io_value_data;
 
 *       ------------------------------------------------------------
 display "@@ 統合したデータのチェック";
@@ -437,8 +474,9 @@ $ontext
 $offtext
 
 execute_unload '%output_file%.gdx', row, col, va, fd, set_vt, row_bas, io_u,
-    io_v, io_fd, io_va, io_q, io_q_v, io_co2, io_table, meta_data, chk_data,
-    chk_va, chk_fd, chk_col_out, chk_row_out, chk_co2_use, chk_co2_so, chk_trade
+    io_v, io_fd, io_va, io_q, io_q_v, io_co2, io_table, io_value_data,
+    meta_data, chk_data, chk_va, chk_fd, chk_col_out, chk_row_out, chk_co2_use,
+    chk_co2_so, chk_trade
 
 
 $onecho > temp.txt
@@ -455,8 +493,11 @@ text="col（列部門）" rng=Set_data!D3 set=col rng=Set_data!D4 rdim=1
 text="va（付加価値部門）" rng=Set_data!G3 set=va rng=Set_data!G4 rdim=1
 text="fd（最終需要部門）" rng=Set_data!J3 set=fd rng=Set_data!J4 rdim=1
 
-*       Value_data
-text="産業連関表（10億円）" rng=Value_data!A1 par=io_table rng=Value_data!A3 rdim=1 cdim=1
+*       Value data of IO table
+text="産業連関表（10億円）" rng=IO_table!A1 par=io_table rng=IO_table!A3 rdim=1 cdim=1
+
+*       Value data of IO table
+text="金額データ（10億円）" rng=Value_table!A1 par=io_value_data rng=Value_table!A3 rdim=2 cdim=1
 
 *       V_table_data
 text="V表（10億円）財×部門" rng=V_table_data!A1 par=io_v rng=V_table_data!A3 rdim=1 cdim=1
