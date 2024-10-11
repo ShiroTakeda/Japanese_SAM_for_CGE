@@ -50,6 +50,9 @@ $if not setglobal output $setglobal output %set_name%
 $setglobal output_file .%fs%aggr_data%fs%%output%
 $setglobal check_file .%fs%data_check%fs%%output%
 
+*       mapping set のチェック
+$if not setglobal check_map $setglobal check_map 1
+
 option decimals = 0;
 
 display "set_file = %set_file%";
@@ -102,45 +105,48 @@ display row_map, col_map, va_map, fd_map;
 set     err_so(*)
         err_tg(*)
 ;
+
+if(%check_map%,
 *       col_map:
-err_so(col_ind) = yes$(sum(col, 1$col_map(col_ind,col)) - 1);
-abort$card(err_so) "Element of source set col_ind not uniquely assigned:", err_so;
+    err_so(col_ind) = yes$(sum(col, 1$col_map(col_ind,col)) - 1);
+    abort$card(err_so) "Element of source set col_ind not uniquely assigned:", err_so;
 
-err_tg(col) = yes$(not sum(col_ind, 1$col_map(col_ind,col)));
-abort$card(err_tg) "Element of target set col has no assignments", err_tg;
+    err_tg(col) = yes$(not sum(col_ind, 1$col_map(col_ind,col)));
+    abort$card(err_tg) "Element of target set col has no assignments", err_tg;
 
-err_so(col_ind) = no;
-err_tg(col) = no;
+    err_so(col_ind) = no;
+    err_tg(col) = no;
 
 *       row_map:
-err_so(row_ind) = yes$(sum(row, 1$row_map(row_ind,row)) - 1);
-abort$card(err_so) "Element of source set row_ind not uniquely assigned:", err_so;
+    err_so(row_ind) = yes$(sum(row, 1$row_map(row_ind,row)) - 1);
+    abort$card(err_so) "Element of source set row_ind not uniquely assigned:", err_so;
 
-err_tg(row) = yes$(not sum(row_ind, 1$row_map(row_ind,row)));
-abort$card(err_tg) "Element of target set row has no assignments", err_tg;
+    err_tg(row) = yes$(not sum(row_ind, 1$row_map(row_ind,row)));
+    abort$card(err_tg) "Element of target set row has no assignments", err_tg;
 
-err_so(row_ind) = no;
-err_tg(row) = no;
+    err_so(row_ind) = no;
+    err_tg(row) = no;
 
 *       fd_map:
-err_so(col_fd_imp) = yes$(sum(fd, 1$fd_map(col_fd_imp,fd)) - 1);
-abort$card(err_so) "Element of source set col_fd_imp not uniquely assigned:", err_so;
+    err_so(col_fd_imp) = yes$(sum(fd, 1$fd_map(col_fd_imp,fd)) - 1);
+    abort$card(err_so) "Element of source set col_fd_imp not uniquely assigned:", err_so;
 
-err_tg(fd) = yes$(not sum(col_fd_imp, 1$fd_map(col_fd_imp,fd)));
-abort$card(err_tg) "Element of target set fd has no assignments", err_tg;
+    err_tg(fd) = yes$(not sum(col_fd_imp, 1$fd_map(col_fd_imp,fd)));
+    abort$card(err_tg) "Element of target set fd has no assignments", err_tg;
 
-err_so(col_fd_imp) = no;
-err_tg(fd) = no;
+    err_so(col_fd_imp) = no;
+    err_tg(fd) = no;
 
 *       va_map:
-err_so(row_va) = yes$(sum(va, 1$va_map(row_va,va)) - 1);
-abort$card(err_so) "Element of source set row_va not uniquely assigned:", err_so;
+    err_so(row_va) = yes$(sum(va, 1$va_map(row_va,va)) - 1);
+    abort$card(err_so) "Element of source set row_va not uniquely assigned:", err_so;
 
-err_tg(va) = yes$(not sum(row_va, 1$va_map(row_va,va)));
-abort$card(err_tg) "Element of target set va has no assignments", err_tg;
+    err_tg(va) = yes$(not sum(row_va, 1$va_map(row_va,va)));
+    abort$card(err_tg) "Element of target set va has no assignments", err_tg;
 
-err_so(row_va) = no;
-err_tg(va) = no;
+    err_so(row_va) = no;
+    err_tg(va) = no;
+);
 
 *       ----------------------------------------------------------------------
 display "@ データの統合";
